@@ -7,7 +7,12 @@ const Filter = (props) => {
 
   return (
     <ListGroup as="ul">
-      <ListGroup.Item as="li" action>
+      <ListGroup.Item
+        as="li"
+        action
+        onClick={() => onItemSelect(null)}
+        active={selectedItem === null}
+      >
         All Categories
       </ListGroup.Item>
       {items.map((item) => (

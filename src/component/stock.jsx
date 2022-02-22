@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { getProducts } from "../service/products";
 import StockTable from "./stockTable";
-import Pagi from "./pagination";
+
 import { Button, Table, Col, Row, Container } from "react-bootstrap";
 import Filter from "./ filter";
 import { getCategories } from "../service/categories";
@@ -23,13 +23,11 @@ class Stock extends React.Component {
   }
 
   handlePageChange = (page) => {
-    console.log(page);
     this.setState({ currentPage: page });
   };
 
   handleSelectItem = (category) => {
-    console.log(category);
-    this.setState({ selectedCategory: category });
+    this.setState({ selectedCategory: category, currentPage: 1 });
   };
 
   render() {
@@ -50,12 +48,7 @@ class Stock extends React.Component {
                 pageSize={this.state.pageSize}
                 currentPage={this.state.currentPage}
                 selectedCategory={this.state.selectedCategory}
-              />
-              <Pagi
-                itemsCount={this.state.allProducts.length}
-                pageSize={this.state.pageSize}
                 onPageChange={this.handlePageChange}
-                currentPage={this.state.currentPage}
               />
             </Col>
           </Row>
