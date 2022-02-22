@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { getProducts } from "../service/products";
 import StockTable from "./stockTable";
-
+import { paginate } from "../utils/paginate";
+import Pagi from "./pagination";
 import { Button, Table, Col, Row, Container } from "react-bootstrap";
 import Filter from "./ filter";
 import { getCategories } from "../service/categories";
@@ -31,24 +32,41 @@ class Stock extends React.Component {
   };
 
   render() {
+    const {
+      allProducts,
+      allCategories,
+      pageSize,
+      currentPage,
+      selectedCategory,
+    } = this.state;
+
+    const filtered = selectedCategory
+      ? allProducts.filter((product) => product.type.id === selectedCategory.id)
+      : allProducts;
+
+    const productsToDisplay = paginate(filtered, pageSize, currentPage);
+
     return (
       <div style={{ marginTop: "20px" }}>
         <Container>
           <Row>
             <Col>
               <Filter
-                items={this.state.allCategories}
+                items={allCategories}
                 onItemSelect={this.handleSelectItem}
-                selectedItem={this.state.selectedCategory}
+                selectedItem={selectedCategory}
               />
             </Col>
             <Col md={9}>
               <StockTable
-                products={this.state.allProducts}
-                pageSize={this.state.pageSize}
-                currentPage={this.state.currentPage}
-                selectedCategory={this.state.selectedCategory}
+                productsToDisplay={productsToDisplay}
+                totalCount={filtered.length}
+              />
+              <Pagi
+                itemsCount={filtered.length}
+                pageSize={pageSize}
                 onPageChange={this.handlePageChange}
+                currentPage={currentPage}
               />
             </Col>
           </Row>
