@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import { Table, Button, Col, Row } from "react-bootstrap";
+import { paginate } from "../utils/paginate";
 
 class StockTable extends React.Component {
   render() {
+    const { products, pageSize, currentPage } = this.props;
+    if (products.length === 0) return <p>There is no product to display.</p>;
+    const productsToDisplay = paginate(products, pageSize, currentPage);
     return (
       <Table>
         <thead>
@@ -15,7 +19,7 @@ class StockTable extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {this.props.products.map(({ id, name, stock, price }) => (
+          {productsToDisplay.map(({ id, name, stock, price }) => (
             <tr key={id}>
               <td>{name}</td>
               <td>{stock}</td>

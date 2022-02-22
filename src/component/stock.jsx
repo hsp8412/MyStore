@@ -23,7 +23,11 @@ class Stock extends React.Component {
     return (
       <div>
         <Container>
-          <StockTable products={this.state.allProducts} />
+          <StockTable
+            products={this.state.allProducts}
+            pageSize={this.state.pageSize}
+            currentPage={this.state.currentPage}
+          />
           <Pagi
             itemsCount={this.state.allProducts.length}
             pageSize={this.state.pageSize}
