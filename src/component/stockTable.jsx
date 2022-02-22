@@ -3,7 +3,7 @@ import { Table, Button, Col, Row } from "react-bootstrap";
 
 class StockTable extends React.Component {
   render() {
-    const { productsToDisplay, totalCount } = this.props;
+    const { productsToDisplay, totalCount, onDelete } = this.props;
     if (totalCount === 0) return <p>There is no product to be shown.</p>;
     return (
       <React.Fragment>
@@ -32,7 +32,11 @@ class StockTable extends React.Component {
                   </Button>
                 </td>
                 <td>
-                  <Button variant="danger" size="sm">
+                  <Button
+                    variant="danger"
+                    size="sm"
+                    onClick={() => onDelete(id)}
+                  >
                     Delete
                   </Button>
                 </td>

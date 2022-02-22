@@ -31,6 +31,13 @@ class Stock extends React.Component {
     this.setState({ selectedCategory: category, currentPage: 1 });
   };
 
+  handleDelete = (id) => {
+    const products = this.state.allProducts.filter(
+      (product) => product.id !== id
+    );
+    this.setState({ allProducts: products });
+  };
+
   render() {
     const {
       allProducts,
@@ -61,6 +68,7 @@ class Stock extends React.Component {
               <StockTable
                 productsToDisplay={productsToDisplay}
                 totalCount={filtered.length}
+                onDelete={this.handleDelete}
               />
               <Pagi
                 itemsCount={filtered.length}
