@@ -4,14 +4,20 @@ import { paginate } from "../utils/paginate";
 
 class StockTable extends React.Component {
   render() {
-    const { products, pageSize, currentPage } = this.props;
+    const { products, pageSize, currentPage, selectedCategory } = this.props;
     if (products.length === 0) return <p>There is no product to display.</p>;
-    const productsToDisplay = paginate(products, pageSize, currentPage);
+
+    const filtered = selectedCategory
+      ? products.filter((product) => product.type.id === selectedCategory.id)
+      : products;
+
+    const productsToDisplay = paginate(filtered, pageSize, currentPage);
     return (
       <Table>
         <thead>
           <tr>
             <th>Name</th>
+            <th>Type</th>
             <th>Stock</th>
             <th>Price</th>
             <th></th>
@@ -19,9 +25,10 @@ class StockTable extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {productsToDisplay.map(({ id, name, stock, price }) => (
+          {productsToDisplay.map(({ id, name, type, stock, price }) => (
             <tr key={id}>
               <td>{name}</td>
+              <td>{type.name}</td>
               <td>{stock}</td>
               <td>{price}</td>
               <td>
