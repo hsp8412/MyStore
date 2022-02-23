@@ -1,62 +1,60 @@
 import React, { Component } from "react";
 import { Table, Button, Col, Row } from "react-bootstrap";
 import TableHeader from "./tableHeader";
+import TableBody from "./tableBody";
 
 class StockTable extends React.Component {
+  columns = [
+    {
+      path: "name",
+      label: "Name",
+    },
+    { path: "type.name", label: "Type" },
+    {
+      path: "stock",
+      label: "Stock",
+    },
+    {
+      path: "price",
+      label: "Price",
+    },
+    {
+      key: "modify",
+      content: (product) => (
+        <Button variant="primary" size="sm">
+          Modify
+        </Button>
+      ),
+    },
+    {
+      key: "delete",
+      content: (product) => (
+        <Button
+          variant="danger"
+          size="sm"
+          onClick={() => this.props.onDelete(product.id)}
+        >
+          Delete
+        </Button>
+      ),
+    },
+  ];
+
   render() {
     const { productsToDisplay, totalCount, onDelete, onSort, sortColumn } =
       this.props;
-    const columns = [
-      {
-        path: "name",
-        label: "Name",
-      },
-      { path: "type.name", label: "Type" },
-      {
-        path: "stock",
-        label: "Stock",
-      },
-      {
-        path: "price",
-        label: "Price",
-      },
-      { key: "modify" },
-      { key: "delete" },
-    ];
+
     if (totalCount === 0) return <p>There is no product to be shown.</p>;
     return (
       <React.Fragment>
         <p>Showing {totalCount} product(s). </p>
         <Table>
           <TableHeader
-            columns={columns}
+            columns={this.columns}
             onSort={onSort}
             sortColumn={sortColumn}
           />
-          <tbody>
-            {productsToDisplay.map(({ id, name, type, stock, price }) => (
-              <tr key={id}>
-                <td>{name}</td>
-                <td>{type.name}</td>
-                <td>{stock}</td>
-                <td>{price}</td>
-                <td>
-                  <Button variant="primary" size="sm">
-                    Modify
-                  </Button>
-                </td>
-                <td>
-                  <Button
-                    variant="danger"
-                    size="sm"
-                    onClick={() => onDelete(id)}
-                  >
-                    Delete
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
+          <TableBody items={productsToDisplay} columns={this.columns} />
         </Table>
       </React.Fragment>
     );
