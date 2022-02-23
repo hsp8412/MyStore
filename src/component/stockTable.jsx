@@ -1,36 +1,38 @@
 import React, { Component } from "react";
 import { Table, Button, Col, Row } from "react-bootstrap";
+import TableHeader from "./tableHeader";
 
 class StockTable extends React.Component {
-  raiseSort = (path) => {
-    const sortColumn = { ...this.props.sortColumn };
-    sortColumn.path = path;
-    if (sortColumn.order == "asc") {
-      sortColumn.order = "desc";
-    } else {
-      sortColumn.order = "asc";
-    }
-    console.log(sortColumn);
-    this.props.onSort(sortColumn);
-  };
-
   render() {
-    const { productsToDisplay, totalCount, onDelete } = this.props;
+    const { productsToDisplay, totalCount, onDelete, onSort, sortColumn } =
+      this.props;
+    const columns = [
+      {
+        path: "name",
+        label: "Name",
+      },
+      { path: "type.name", label: "Type" },
+      {
+        path: "stock",
+        label: "Stock",
+      },
+      {
+        path: "price",
+        label: "Price",
+      },
+      { key: "modify" },
+      { key: "delete" },
+    ];
     if (totalCount === 0) return <p>There is no product to be shown.</p>;
     return (
       <React.Fragment>
         <p>Showing {totalCount} product(s). </p>
         <Table>
-          <thead>
-            <tr>
-              <th onClick={() => this.raiseSort("name")}>Name</th>
-              <th onClick={() => this.raiseSort("type.name")}>Type</th>
-              <th onClick={() => this.raiseSort("stock")}>Stock</th>
-              <th onClick={() => this.raiseSort("price")}>Price</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
+          <TableHeader
+            columns={columns}
+            onSort={onSort}
+            sortColumn={sortColumn}
+          />
           <tbody>
             {productsToDisplay.map(({ id, name, type, stock, price }) => (
               <tr key={id}>
