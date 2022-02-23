@@ -6,6 +6,7 @@ import Pagi from "./pagination";
 import { Button, Table, Col, Row, Container } from "react-bootstrap";
 import Filter from "./ filter";
 import { getCategories } from "../service/categories";
+import _ from "lodash";
 
 class Stock extends React.Component {
   state = {
@@ -14,6 +15,7 @@ class Stock extends React.Component {
     pageSize: 4,
     currentPage: 1,
     selectedCategory: null,
+    sortColumn: { path: "name", order: "asc" },
   };
 
   componentDidMount() {
@@ -38,6 +40,10 @@ class Stock extends React.Component {
     this.setState({ allProducts: products });
   };
 
+  handleSort = (sortColumn) => {
+    this.setState({ sortColumn });
+  };
+
   render() {
     const {
       allProducts,
@@ -45,13 +51,16 @@ class Stock extends React.Component {
       pageSize,
       currentPage,
       selectedCategory,
+      sortColumn,
     } = this.state;
 
     const filtered = selectedCategory
       ? allProducts.filter((product) => product.type.id === selectedCategory.id)
       : allProducts;
 
-    const productsToDisplay = paginate(filtered, pageSize, currentPage);
+    const sorted = _.orderBy(filtered, sortColumn.path, sortColumn.order);
+
+    const productsToDisplay = paginate(sorted, pageSize, currentPage);
 
     return (
       <div style={{ marginTop: "20px" }}>
@@ -69,6 +78,8 @@ class Stock extends React.Component {
                 productsToDisplay={productsToDisplay}
                 totalCount={filtered.length}
                 onDelete={this.handleDelete}
+                onSort={this.handleSort}
+                sortColumn={sortColumn}
               />
               <Pagi
                 itemsCount={filtered.length}

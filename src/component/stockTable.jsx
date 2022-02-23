@@ -2,6 +2,18 @@ import React, { Component } from "react";
 import { Table, Button, Col, Row } from "react-bootstrap";
 
 class StockTable extends React.Component {
+  raiseSort = (path) => {
+    const sortColumn = { ...this.props.sortColumn };
+    sortColumn.path = path;
+    if (sortColumn.order == "asc") {
+      sortColumn.order = "desc";
+    } else {
+      sortColumn.order = "asc";
+    }
+    console.log(sortColumn);
+    this.props.onSort(sortColumn);
+  };
+
   render() {
     const { productsToDisplay, totalCount, onDelete } = this.props;
     if (totalCount === 0) return <p>There is no product to be shown.</p>;
@@ -11,10 +23,10 @@ class StockTable extends React.Component {
         <Table>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Type</th>
-              <th>Stock</th>
-              <th>Price</th>
+              <th onClick={() => this.raiseSort("name")}>Name</th>
+              <th onClick={() => this.raiseSort("type.name")}>Type</th>
+              <th onClick={() => this.raiseSort("stock")}>Stock</th>
+              <th onClick={() => this.raiseSort("price")}>Price</th>
               <th></th>
               <th></th>
             </tr>
