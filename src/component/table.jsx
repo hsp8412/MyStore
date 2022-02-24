@@ -3,8 +3,7 @@ import { Table } from "react-bootstrap";
 import TableBody from "./tableBody";
 import TableHeader from "./tableHeader";
 
-const MyTable = (props) => {
-  const { columns, onSort, sortColumn, items } = props;
+const MyTable = ({ columns, onSort, sortColumn, items }) => {
   return (
     <Table>
       <TableHeader columns={columns} onSort={onSort} sortColumn={sortColumn} />

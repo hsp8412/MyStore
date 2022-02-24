@@ -40,8 +40,7 @@ class StockTable extends React.Component {
   ];
 
   render() {
-    const { productsToDisplay, totalCount, onDelete, onSort, sortColumn } =
-      this.props;
+    const { productsToDisplay, totalCount, onSort, sortColumn } = this.props;
 
     if (totalCount === 0) return <p>There is no product to be shown.</p>;
     return (
