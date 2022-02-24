@@ -7,16 +7,16 @@ class StockTable extends React.Component {
   columns = [
     {
       path: "name",
-      label: "Name",
+      label: "Name ",
     },
-    { path: "type.name", label: "Type" },
+    { path: "type.name", label: "Type " },
     {
       path: "stock",
-      label: "Stock",
+      label: "Stock ",
     },
     {
       path: "price",
-      label: "Price",
+      label: "Price ",
     },
     {
       key: "modify",
