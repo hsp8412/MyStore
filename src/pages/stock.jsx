@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { getProducts } from "../service/products";
-import StockTable from "./stockTable";
+import StockTable from "../component/stockTable";
 import { paginate } from "../utils/paginate";
-import Pagi from "./pagination";
+import Pagi from "../component/pagination";
 import { Button, Table, Col, Row, Container } from "react-bootstrap";
-import Filter from "./ filter";
+import Filter from "../component/ filter";
 import { getCategories } from "../service/categories";
 import _ from "lodash";
 

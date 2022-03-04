@@ -2,12 +2,12 @@ import logo from "./logo.svg";
 import "./App.css";
 import NavBar from "./component/navBar";
 import { Route, Routes } from "react-router-dom";
-import Message from "./component/message";
-import Orders from "./component/orders";
-import Stock from "./component/stock";
-import Transactions from "./component/transactions";
-import NotFound from "./component/notFount";
-import ProductDetails from "./component/productDetail";
+import Message from "./pages/message";
+import Orders from "./pages/orders";
+import Stock from "./pages/stock";
+import Transactions from "./pages/transactions";
+import NotFound from "./pages/notFount";
+import ProductDetails from "./pages/productDetail";
 
 function App() {
   return (
