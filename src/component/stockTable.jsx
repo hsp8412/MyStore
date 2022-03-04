@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Table, Button, Col, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import MyTable from "./table";
 
 class StockTable extends React.Component {
@@ -7,6 +8,9 @@ class StockTable extends React.Component {
     {
       path: "name",
       label: "Name ",
+      content: (product) => (
+        <Link to={`/products/${product.id}`}>{product.name}</Link>
+      ),
     },
     { path: "type.name", label: "Type " },
     {

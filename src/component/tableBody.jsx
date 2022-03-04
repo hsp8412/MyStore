@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import _ from "lodash";
 class TableBody extends Component {
   renderCell(item, column) {
-    if (column.path) return _.get(item, column.path);
+    if (!column.content) return _.get(item, column.path);
     return column.content(item);
   }
 
