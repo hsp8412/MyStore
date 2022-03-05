@@ -8,6 +8,7 @@ import Stock from "./pages/stock";
 import Transactions from "./pages/transactions";
 import NotFound from "./pages/notFount";
 import ProductDetails from "./pages/productDetail";
+import LoginForm from "./pages/login";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <NavBar />
       <div className="content">
         <Routes>
+          <Route path="/login" element={<LoginForm />} />
           <Route path="/stock" element={<Stock />} />
           <Route path="/message" element={<Message />} />
           <Route path="/orders" element={<Orders />} />

@@ -12,6 +12,7 @@ class NavBar extends React.Component {
             <Nav.Link href="/orders">Orders</Nav.Link>
             <Nav.Link href="/transactions">Transactions</Nav.Link>
             <Nav.Link href="/message">Messages</Nav.Link>
+            <Nav.Link href="/login">Login</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
