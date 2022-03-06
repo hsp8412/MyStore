@@ -9,7 +9,9 @@ class StockTable extends React.Component {
       path: "name",
       label: "Name ",
       content: (product) => (
-        <Link to={`/products/${product.id}`}>{product.name}</Link>
+        <Link to={`/products/${product.id}`} className="clickable">
+          {product.name}
+        </Link>
       ),
     },
     { path: "type.name", label: "Type " },
@@ -46,10 +48,11 @@ class StockTable extends React.Component {
   render() {
     const { productsToDisplay, totalCount, onSort, sortColumn } = this.props;
 
-    if (totalCount === 0) return <p>There is no product to be shown.</p>;
+    if (totalCount === 0)
+      return <p className="text">There is no product to be shown.</p>;
     return (
       <React.Fragment>
-        <p>Showing {totalCount} product(s). </p>
+        <p className="text">Showing {totalCount} product(s). </p>
         <MyTable
           columns={this.columns}
           onSort={onSort}
